@@ -1,14 +1,19 @@
 import streamlit as st
 import requests
-from config import TAF_URL, LOC, KEY
 from datetime import datetime
 import pytz
 from dateutil import parser
+from dotenv import dotenv_values
+config = dotenv_values(".env")
+
+url2 = config["TAF_URL"]
+loc = config["LOC"]
+key = config["KEY"]
 
 def fetch_taf_data():
     """Fetches TAF data from the CheckWX API."""
-    url = f"{TAF_URL}/{LOC}/decoded"
-    headers = {"X-API-Key": KEY}
+    url = f"{url2}/{loc}/decoded"
+    headers = {"X-API-Key": key}
     try:
         response = requests.get(url, headers=headers)
         if response.status_code == 200:
@@ -149,5 +154,3 @@ def show_taf():
     # Optional: Expand raw JSON data
     with st.expander("🔍 View Full TAF Report"):
         st.json(taf_data, expanded=False)
-
-

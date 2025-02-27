@@ -1,14 +1,18 @@
 import streamlit as st
 import requests
-from config import BASE_URL, LOCATION, TOKEN
 from datetime import datetime
 import pytz
 from dateutil import parser
+from dotenv import dotenv_values
+config = dotenv_values(".env")
 
+url2 = config["BASE_URL"]
+loc = config["LOCATION"]
+toc = config["TOKEN"]
 
 def fetch_metar_data():
     """Fetches raw METAR JSON data from the API."""
-    url = f"{BASE_URL}/{LOCATION}?token={TOKEN}&format=json"
+    url = f"{url2}/{loc}?token={toc}&format=json"
     try:
         response = requests.get(url)
         if response.status_code == 200:
@@ -80,7 +84,7 @@ def show_metar():
     with info_col2:
         st.info(f"🕒 **Time (PEI Time):** {pei_time.split(' ')[1] + ' ' + pei_time.split(' ')[2] if pei_time != 'Unavailable' else 'Unavailable'}")
     with info_col3:
-        st.info(f"📍 **Location:** {data.get('station', LOCATION)}")
+        st.info(f"📍 **Location:** {data.get('station', loc)}")
 
     # Weather Details (in 3 rows)
     st.markdown("---")
