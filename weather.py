@@ -1,18 +1,23 @@
 import requests
 import numpy as np
 import streamlit as st
-from config import BASE_URL, LOCATION, TOKEN
 from datetime import datetime, timedelta
 import pytz
 import pandas as pd
 from taf import fetch_taf_data, convert_to_pei_time
 from cloud import fetch_cloud_data
+from dotenv import dotenv_values
+config = dotenv_values(".env")
 
 solar_data = pd.read_csv('solar_2025.csv')
 solar_data['timestamp'] = pd.to_datetime(solar_data['timestamp'])
 
+base = config ["BASE_URL"]
+location = config ["LOCATION"]
+token = config ["TOKEN"]
+
 def fetch_weather_data():
-    url = f"{BASE_URL}/{LOCATION}?token={TOKEN}&format=json"
+    url = f"{base}/{location}?token={token}&format=json"
     try:
         response = requests.get(url)
         if response.status_code == 200:

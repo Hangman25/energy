@@ -3,7 +3,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
-from config import PSW, EMAIL_FROM, EMAIL_TO
+from dotenv import dotenv_values
+config = dotenv_values(".env")
 
 # SMTP server configuration
 SMTP_PORT = 587
@@ -25,11 +26,11 @@ def send_email(recipient, csv_buffer, filename):
         # Connect to the SMTP server and start TLS encryption
         with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
             server.starttls()
-            server.login(EMAIL_FROM, PSW)
+            server.login(config["EMAIL_FROM"], config ["PSW"])
 
             # Create the email message
             msg = MIMEMultipart()
-            msg['From'] = EMAIL_FROM
+            msg['From'] = config ["EMAIL_FROM"]
             msg['To'] = recipient
             msg['Subject'] = "Energy Prediction CSV Attached"
 
@@ -49,7 +50,7 @@ def send_email(recipient, csv_buffer, filename):
             msg.attach(attachment)
 
             # Send the email
-            server.sendmail(EMAIL_FROM, recipient, msg.as_string())
+            server.sendmail(config ["EMAIL_FROM"], recipient, msg.as_string())
 
     except Exception as e:
         print(f"Error sending email: {e}")

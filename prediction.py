@@ -7,9 +7,10 @@ from weather import extract_weather_features_for_hours
 from model import load_model, predict_power
 from io import BytesIO
 import plotly.express as px
-from config import PSW, EMAIL_FROM, EMAIL_TO
 from datetime import datetime
 from csv_email import send_email
+from dotenv import dotenv_values
+config = dotenv_values(".env")
 
 def plot_interactive_graphs(data):
     # Graph 1: Predicted Power (Interactive)
@@ -79,7 +80,7 @@ def show_prediction():
     left, middle, right = st.columns(3)
     if left.button("📧 Send Email", use_container_width=True):
         csv_buffer.seek(0)
-        send_email(EMAIL_TO, csv_buffer, filename)
+        send_email(config ["EMAIL_TO"], csv_buffer, filename)
         left.markdown("Email Sent.")
 
     if middle.download_button(label="💾 Download Locally",
