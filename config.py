@@ -14,4 +14,4 @@ TAF_URL = 'https://api.checkwx.com/taf'
 # Email
 PSW = "twfxdvjpolkszavm"
 EMAIL_FROM = "predictionenergy@gmail.com"
-EMAIL_TO = "ygill@upei.ca"
+EMAIL_TO = "csingh15126@upei.ca"
