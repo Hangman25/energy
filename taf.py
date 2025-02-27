@@ -3,12 +3,10 @@ import requests
 from datetime import datetime
 import pytz
 from dateutil import parser
-from dotenv import dotenv_values
-config = dotenv_values(".env")
 
-url2 = config["TAF_URL"]
-loc = config["LOC"]
-key = config["KEY"]
+url2 = st.secrets["TAF_URL"]
+loc = st.secrets["LOC"]
+key = st.secrets["KEY"]
 
 def fetch_taf_data():
     """Fetches TAF data from the CheckWX API."""
