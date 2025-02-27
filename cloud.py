@@ -4,8 +4,6 @@ import pandas as pd
 import plotly.express as px
 from io import StringIO
 import os
-from dotenv import dotenv_values
-config = dotenv_values(".env")
 
 # API Endpoint
 BASE_URL = "https://spotwx.io/api.php"
@@ -13,7 +11,7 @@ BASE_URL = "https://spotwx.io/api.php"
 def fetch_cloud_data():
     """Fetches cloud/weather data from the SpotWX API (CSV format)."""
     params = {
-        "key": config["API_KEY"],
+        "key": st.secrets["API_KEY"],
         "lat": 46.4392,
         "lon": -63.8413,
         "model": "hrrr"

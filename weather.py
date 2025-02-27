@@ -6,15 +6,13 @@ import pytz
 import pandas as pd
 from taf import fetch_taf_data, convert_to_pei_time
 from cloud import fetch_cloud_data
-from dotenv import dotenv_values
-config = dotenv_values(".env")
 
 solar_data = pd.read_csv('solar_2025.csv')
 solar_data['timestamp'] = pd.to_datetime(solar_data['timestamp'])
 
-base = config ["BASE_URL"]
-location = config ["LOCATION"]
-token = config ["TOKEN"]
+base = st.secrets["BASE_URL"]
+location = st.secrets["LOCATION"]
+token = st.secrets["TOKEN"]
 
 def fetch_weather_data():
     url = f"{base}/{location}?token={token}&format=json"
