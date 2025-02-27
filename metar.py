@@ -3,12 +3,11 @@ import requests
 from datetime import datetime
 import pytz
 from dateutil import parser
-from dotenv import dotenv_values
-config = dotenv_values(".env")
 
-url2 = config["BASE_URL"]
-loc = config["LOCATION"]
-toc = config["TOKEN"]
+
+url2 = st.secrets["BASE_URL"]
+loc = st.secrets["LOCATION"]
+toc = st.secrets["TOKEN"]
 
 def fetch_metar_data():
     """Fetches raw METAR JSON data from the API."""
