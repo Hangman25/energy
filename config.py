@@ -2,7 +2,7 @@
 BASE_URL = "https://avwx.rest/api/metar"
 LOCATION = "CYYG"  # ICAO code for Charlottetown, PEI
 TOKEN = "2zDcIZG1c3VebJwbed-LJDtLNZkAS3qT-h-JP0elq78"
-
+#test
 # SpotWX
 API_KEY = "2ezGMv02SPRognWpKomgZDeMn5FGeE5R"
 
