@@ -114,7 +114,7 @@ def visualize_csv(file_name):
         if st.session_state.view_mode == "Graph":
             st.subheader(title_text)  # Dynamic title
             all_y_options = ["solar_azimuthdegrees", "solar_elevationdegrees", "solar_declinationdegrees", "hour_angledegrees"]
-            selected_y_axes = st.multiselect("Select Y-axis columns", all_y_options, default=["solar_azimuthdegrees"])
+            selected_y_axes = st.multiselect("Select Y-axis columns", all_y_options, default=["solar_elevationdegrees"])
 
             primary_y = ["solar_azimuthdegrees"] if "solar_azimuthdegrees" in selected_y_axes else selected_y_axes
             secondary_y = [col for col in selected_y_axes if col != "solar_azimuthdegrees"] if "solar_azimuthdegrees" in selected_y_axes else []

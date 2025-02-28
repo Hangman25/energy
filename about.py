@@ -82,6 +82,10 @@ def show_about():
               """
          )
      
+    st.markdown(
+         """### Our Predictions So Far: """
+    )
+
     st.markdown (
         """
         ---
