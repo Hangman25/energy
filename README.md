@@ -1,6 +1,7 @@
-# SolarEnergy_Prediction
+# Solar Energy Prediction
 
-A machine learning project aimed at predicting solar energy output based on various environmental factors.
+A solar energy prediction model that uses real-time METAR and forecased TAF-weather data from Charlotetown Airport to estimate the hourly solar power output for Slemon Park, Summerside, PE. It integrates weather station data from Environment Canada and advanced machine learning model to provide 4-Hr solar power prediction.
+
 
 ## Key Features:
 - **Real-time Weather Data**: Fetches METAR and TAF data to incorporate dynamic environmental conditions.
@@ -64,6 +65,16 @@ SolarEnergy_Prediction/
 
 ## Libraries
 ```
+streamlit==1.42.0
+plotly==6.0.0
+joblib==1.4.2
+xgboost==2.1.4
+requests==2.32.3
+pandas==2.2.2
+numpy==1.26.4
+python-dateutil==2.9.0  
+pytz==2024.1 
+python-dotenv==1.0.1
 ```
 
 ## Contributing
