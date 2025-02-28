@@ -24,5 +24,5 @@ elif page == "Cloud Forecast":
 elif page == "TAF":
     show_taf()
 elif page == "Solar Parameters":
-    file_name = "solar_2025.csv"  
+    file_name = "csv/solar_2025.csv"  
     visualize_csv(file_name)  

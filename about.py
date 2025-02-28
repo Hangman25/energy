@@ -1,4 +1,7 @@
 import streamlit as st
+import pandas as pd
+import plotly.express as px
+import os
 
 def show_about():
     st.title("About CIRRUS")
@@ -81,10 +84,64 @@ def show_about():
              
               """
          )
-     
-    st.markdown (
+
+    st.markdown("### Our Predictions So Far:")
+
+    # Load CSV dynamically
+    csv_path = os.path.join("csv", "residuals.csv")
+    
+    if os.path.exists(csv_path):
+        df = pd.read_csv(csv_path)
+
+        # Ensure 'Timestamp' remains a column (not an index)
+        if {'Timestamp', 'Actual Values', 'Predicted Values', 'Residuals'}.issubset(df.columns):
+            df['Timestamp'] = pd.to_datetime(df['Timestamp'])  # Convert Timestamp to datetime format
+            df = df[['Timestamp', 'Actual Values', 'Predicted Values', 'Residuals']]  # Explicit column order
+
+            # Sort data based on Timestamp to avoid incorrect order
+            df = df.sort_values(by='Timestamp').reset_index(drop=True)
+
+            # Plot Actual vs Predicted using Plotly
+            fig1 = px.line(df, x=df.index, y=['Actual Values', 'Predicted Values'], 
+                           labels={'index': 'Time Step', 'value': 'Solar Energy Output'},
+                           title="Actual vs. Predicted Solar Energy",
+                           markers=True)
+
+            fig1.update_layout(
+                xaxis_title="Time Step",
+                yaxis_title="Solar Energy Output",
+                legend_title="Legend",
+                template="plotly_white"
+            )
+
+            st.plotly_chart(fig1, use_container_width=True)
+
+            # Plot Residuals using Plotly
+            st.markdown("### Residuals (Prediction Error)")
+            fig2 = px.bar(df, x=df.index, y='Residuals',
+                          labels={'index': 'Time Step', 'Residuals': 'Prediction Error'},
+                          title="Prediction Error (Residuals)")
+
+            fig2.update_layout(
+                xaxis_title="Time Step",
+                yaxis_title="Residuals (Actual - Predicted)",
+                template="plotly_white"
+            )
+
+            st.plotly_chart(fig2, use_container_width=True)
+
+            # Display Raw CSV in an Expander
+            with st.expander("View Raw Data"):
+                st.dataframe(df, use_container_width=True)  # Display dataframe with scroll
+
+        else:
+            st.warning("CSV file must contain columns: 'Timestamp', 'Actual Values', 'Predicted Values', and 'Residuals'.")
+    else:
+        st.error("No CSV file found. Please upload or generate a predictions.csv file in the 'csv' folder.")
+
+    st.markdown(
         """
         ---
         *© Developed by Yuvraj Gill for Design 2025. All rights reserved.*
         """
-    )      
+    )  
