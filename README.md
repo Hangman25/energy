@@ -12,73 +12,63 @@ A machine learning project aimed at predicting solar energy output based on vari
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/Hangman25/SolarEnergy_Prediction.git
-   cd SolarEnergy_Prediction
+   git clone https://github.com/Hangman25/Energy.git
+   cd Energy
    ```
-
-2. **Set Up a Virtual Environment**:
+2. **Set Up a Virtual Environment using Conda**:
    ```bash
-   python3 -m venv venv
-   source venv/bin/activate  # On Windows, use venv\Scripts\activate
+   conda create --name my_env python=3.9
+   conda activate my_env
    ```
-
 3. **Install Dependencies**:
    ```bash
+   conda install pip
    pip install -r requirements.txt
    ```
 
 ## Usage
 
-1. **Prepare the Data**:
-   - Ensure your dataset is in the `data/` directory.
-   - Update the data preprocessing scripts as needed to accommodate your data format.
+1. **Trained Model**:
+   - `model.pkl` is the trained xg-boost model.
+   - Fintune it on new data to increase its accuracy. 
+2. **CSV**:
+   - `residuals.csv` contains the current results of the trained model.
+   - `solar_2025.csv` contains the solar parameters, calculated for Slemon Park. 
 
-2. **Train the Model**:
-   ```bash
-   python train_model.py
-   ```
-
-3. **Make Predictions**:
-   ```bash
-   python predict.py --input your_input_data.csv --output predictions.csv
-   ```
-
+   
 ## Project Structure
 
 ```
 SolarEnergy_Prediction/
-│── data/                # Raw and processed datasets
-│   ├── raw/             # Raw data files
-│   ├── processed/       # Cleaned and transformed data
-│   └── metadata/        # Data description and sources
-│── models/              # Saved trained models
-│   ├── checkpoints/     # Model checkpoints during training
-│   ├── final/           # Final trained models
-│   └── logs/            # Training logs and metrics
-│── scripts/             # Python scripts for training & prediction
-│   ├── preprocessing.py # Data preprocessing script
-│   ├── train_model.py   # Model training script
-│   ├── predict.py       # Prediction script
-│   └── evaluation.py    # Model evaluation script
+│── csv/                # Processed datasets
+│   ├── residuals.csv/  # Results data file
+│   ├── solar_2025.csv/ # Solar parameters 
+│── scripts/            # Python scripts for prediction & email
+│   ├── app.py          # Main application 
+│   ├── about.py        # About page
+│   ├── cloud.py        # NOAA Cloud script
+│   ├── csv_email.py    # Email script
+│   ├── metar.py        # METAR script
+│   ├── model.py        # Model script
+│   ├── prediction.py   # Prediction script
+│   ├──solar.py         # Solar script
+│   ├── taf.py          # TAR script
+│   ├── weather.py      # Weather script
 │── docs/                # Documentation files
 │   ├── README.md        # Documentation for the project
 │   ├── API_guide.md     # API documentation (if applicable)
-│   └── model_explanation.md # Details on model selection and performance
 │── requirements.txt     # Dependencies
-│── train_model.py       # Entry point for training
-│── predict.py           # Entry point for predictions
 │── LICENSE              # License information
 │── .gitignore           # Files to be ignored by Git
 ```
 
-## Tech Stack
-
-- **Programming Language**: Python
-- **Libraries**: pandas, scikit-learn, numpy, matplotlib
+## Libraries
+```
+```
 
 ## Contributing
 
-Contributions are welcome! Please fork the repository and create a pull request with your proposed changes.
+This work is for 3rd-Year Design project. 
 
 ## License
 
