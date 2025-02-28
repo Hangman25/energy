@@ -59,7 +59,6 @@ SolarEnergy_Prediction/
 │   ├── README.md        # Documentation for the project
 │   ├── API_guide.md     # API documentation (if applicable)
 │── requirements.txt     # Dependencies
-│── LICENSE              # License information
 │── .gitignore           # Files to be ignored by Git
 ```
 
