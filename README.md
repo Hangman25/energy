@@ -26,6 +26,11 @@ A solar energy prediction model that uses real-time METAR and forecased TAF-weat
    conda install pip
    pip install -r requirements.txt
    ```
+4. **Run Program**:
+   ```bash
+   cd Energy
+   streamlit run app.py 
+   ```
 
 ## Usage
 
