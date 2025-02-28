@@ -23,7 +23,7 @@ def show_about():
     st.markdown(
          """### What is on: """
     )
-
+    
     with st.expander("Predictions Page?"):
           st.markdown(
                """
@@ -41,7 +41,7 @@ def show_about():
               '''
                 - **What is METAR?**: METAR is a standardized format for reporting weather information. It is primarily used by aircraft pilots and meteorologists, who analyze aggregated METAR data to aid in weather forecasting.  
                 - **Validity**: Since a METAR report is based on current weather conditions, it is only valid for one hour.  
-                - **Location**: This program uses a predefined location (Charlottetown, PE) and retrieves the METAR report from the area's airport.  
+                - **Location**: This program uses a *predefined location (Charlottetown, PE)* and retrieves the METAR report from the area's airport.  
 
               '''
          )
@@ -49,19 +49,39 @@ def show_about():
     with st.expander("TAF Page?"):
          st.markdown(
               """
-              - Add more  
+              - **What is TAF?**: In meteorology and aviation, a *Terminal Aerodrome Forecast (TAF)* is a format used for reporting weather forecast information. TAFs complement and follow a similar encoding structure as *METAR* reports. They are produced by human forecasters stationed on the ground.
+              - **Validity**: Since TAFs are weather forecasts, they remain valid for the *six hours* following their issuance.
+              - **Location**: Similar to METAR, a TAF report is specific to a *predefined location*. In this case, the forecast is retrieved from the *Charlottetown, PE* airport.
+
               """
          )
+
+    with st.expander ("Cloud Forecast?"):
+         st.markdown(
+              """
+              - **Forecasting Model**: The program utilizes the *HRRR (High-Resolution Rapid Refresh)* model, provided by *NOAA (National Oceanic and Atmospheric Administration)*.
+              - **Resolution**: The HRRR model has a *3 km resolution* and provides *18-hour advanced forecasts*.
+              - **Location**: Unlike *TAF* and *METAR*, this model’s predefined location is *Slemon Park, Summerside, PE*.
+              - **Cloud Coverage**: In addition to regular weather forecasts, the HRRR model offers *detailed cloud coverage information*.
+              - **Cloud Coverage Types**: The HRRR model provides **three different cloud coverage levels** at various altitudes:
+               - **Low Cloud Coverage (LCC)**
+               - **Mid Cloud Coverage (MCC)**
+               - **High Cloud Coverage (HCC)**
+
+              """
+         )
+     
     with st.expander ("Solar Page?"):
          st.markdown(
               """
                 - **Solar Elevation**: Sun's height above the horizon. Measured in degrees.
                 - **Solar Azimuthd**: Sun's direction along the horizon. Measured in degrees.
                 - **Solar Declination**: Sun's angle relative to the Earth's equatorial plane. Measured in degrees.
-                - **Hour Angle: Sun's position relative to solar noon. Measured in degrees.
+                - **Hour Angle**: Sun's position relative to solar noon. Measured in degrees.
+             
               """
          )
-
+     
     st.markdown (
         """
         ---
