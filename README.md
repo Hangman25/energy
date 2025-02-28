@@ -104,6 +104,7 @@ EMAIL_TO = "Recivers Email Address"
 ```
 
 ## Website link
+Paste the bottom link on browser to use the program.
 ```
 https://hangman25-energy-prediction.streamlit.app/
 ```
