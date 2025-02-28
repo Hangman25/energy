@@ -76,6 +76,28 @@ pytz==2024.1
 python-dotenv==1.0.1
 ```
 
+## Format for API Keys
+Please replace `YOUR_API_KEY`, `Senders Email Address`, and `Recivers Email Address` before running the program. 
+```
+# Weather API Configuration
+BASE_URL = "https://avwx.rest/api/metar"
+LOCATION = "CYYG"  # ICAO code for Charlottetown, PEI
+TOKEN = "YOUR_API_KEY"
+
+# SpotWX
+API_KEY = "YOUR_API_KEY"
+
+# TAF API Configuration
+KEY = 'YOUR_API_KEY'
+LOC = "CYYG"  # ICAO code for Charlottetown, PEI
+TAF_URL = 'https://api.checkwx.com/taf'
+
+# Email
+PSW = "YOUR_API_KEY"
+EMAIL_FROM = "Senders Email Address"
+EMAIL_TO = "Recivers Email Address"
+```
+
 ## Contributing
 
 This work is for 3rd-Year Design project. 
