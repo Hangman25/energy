@@ -60,11 +60,10 @@ SolarEnergy_Prediction/
 │   ├──solar.py         # Solar script
 │   ├── taf.py          # TAR script
 │   ├── weather.py      # Weather script
-│── docs/                # Documentation files
-│   ├── README.md        # Documentation for the project
-│   ├── API_guide.md     # API documentation (if applicable)
-│── requirements.txt     # Dependencies
-│── .gitignore           # Files to be ignored by Git
+│── docs/               # Documentation files
+│   ├── README.md       # Documentation for the project
+│── requirements.txt    # Dependencies
+│── .gitignore          # Files to be ignored by Git
 ```
 
 ## Libraries
