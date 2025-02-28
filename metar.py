@@ -4,7 +4,6 @@ from datetime import datetime
 import pytz
 from dateutil import parser
 
-
 url2 = st.secrets["BASE_URL"]
 loc = st.secrets["LOCATION"]
 toc = st.secrets["TOKEN"]

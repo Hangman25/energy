@@ -78,7 +78,7 @@ def show_prediction():
     left, middle, right = st.columns(3)
     if left.button("📧 Send Email", use_container_width=True):
         csv_buffer.seek(0)
-        send_email(st.secrets["EMAIL_TO"], csv_buffer, filename)
+        send_email(config ["EMAIL_TO"], csv_buffer, filename)
         left.markdown("Email Sent.")
 
     if middle.download_button(label="💾 Download Locally",
