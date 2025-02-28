@@ -34,7 +34,7 @@ def send_email(recipient, csv_buffer, filename):
             msg['Subject'] = "4Hr Solar Energy Predictions"
 
             # Email body
-            body = "Please find attached the 4-hour solar energy prediction CSV file. This is an automatically generated email, and this inbox is not monitored regularly. If you have any questions, please contact Yuvi at ygill@upei.ca."
+            body = "Hello. Please find attached the 4-hour solar energy prediction CSV file. Note that this is an automatically generated email, and this inbox is not monitored regularly. If you have any questions, please contact Yuvi at ygill@upei.ca."
             msg.attach(MIMEText(body, 'plain'))
 
             # Read CSV data from the buffer
