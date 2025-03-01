@@ -39,7 +39,7 @@ def show_cloud():
     st.title("☁ 16 Hour Cloud & Weather Forecast")
     st.markdown(
         """
-        - **###Forecasting Model**: The program utilizes the *HRRR (High-Resolution Rapid Refresh)* model, provided by *NOAA (National Oceanic and Atmospheric Administration)*.
+        - **Forecasting Model**: The program utilizes the *HRRR (High-Resolution Rapid Refresh)* model, provided by *NOAA (National Oceanic and Atmospheric Administration)*.
         - **Resolution**: The HRRR model has a *3 km resolution* and provides *18-hour advanced forecasts*.
         - **Location**: Unlike *TAF* and *METAR*, this model’s predefined location is *Slemon Park, Summerside, PE*.
         - **Cloud Coverage**: In addition to regular weather forecasts, the HRRR model offers *detailed cloud coverage information*.
@@ -127,7 +127,7 @@ def show_cloud():
 
     # Display Data Table (Now Below Column Selection)
     with st.expander("🔍 View Full Cloud Forecast", expanded=True):
-        st.data_editor(df_filtered, use_container_width=True, height=700)
+        st.data_editor(df_filtered, use_container_width=True, height=500)
 
 def plot_dynamic_graph(df, selected_features, renamed_columns):
     """Creates an interactive Plotly graph based on user-selected features."""
