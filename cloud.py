@@ -3,7 +3,6 @@ import requests
 import pandas as pd
 import plotly.express as px
 from io import StringIO
-import os
 
 # API Endpoint
 BASE_URL = "https://spotwx.io/api.php"
@@ -35,43 +34,10 @@ def fetch_cloud_data():
         st.error(f"⚠ Error fetching cloud data: {e}")
         return pd.DataFrame()
 
-
-def plot_dynamic_graph(df, selected_features):
-    """Creates an interactive Plotly graph based on user-selected features."""
-    st.title("☁ Cloud & Weather Forecast")
-    
-
-    # Convert index (Date & Time) to datetime format
-    df = df.copy()
-    df.index = pd.to_datetime(df.index)
-
-    # Create Plotly figure
-    fig = px.line(
-        df,
-        x=df.index,
-        y=selected_features,
-        title="Weather Trends Over Time",
-        labels={"value": "Measurement", "index": "Date & Time (UTC)"},
-        markers=True
-    )
-
-    # ✅ Add Interactive Features
-    fig.update_layout(
-        xaxis_title="Date & Time (UTC)",
-        yaxis_title="Value",
-        legend_title="Weather Variables",
-        hovermode="x unified",
-        template="plotly_white",
-    )
-
-    # ✅ Show the Plot in Streamlit
-    st.plotly_chart(fig, use_container_width=True)
-    
-
 def show_cloud():
     """Displays cloud/weather forecast in a structured and user-friendly format."""
-    st.subheader("☁ Cloud & Weather Forecast")
-    #st.subheader("📈 Interactive Weather Trends Over Time")
+    st.title("☁ Cloud & Weather Forecast")
+
     # Fetch cloud data
     df = fetch_cloud_data()
 
@@ -108,10 +74,6 @@ def show_cloud():
         "HGT_CLOUDBASE": "📏 Cloud Base Height (m)"
     }
 
-    # ✅ Show Graph if Features are Selected
-    if selected_features:
-        plot_dynamic_graph(df_filtered, selected_features)
-
     # ✅ Allow Users to Select Which Columns to Display
     selected_columns = st.multiselect(
         "📋 Select Columns to Display in Table:",
@@ -133,7 +95,11 @@ def show_cloud():
     if "📅 Date & Time (UTC)" in df_filtered.columns:
         df_filtered.set_index("📅 Date & Time (UTC)", inplace=True)
 
-     # ✅ Feature Selection for Graph
+    # Display Data Table
+    with st.expander("🔍 View Full Cloud Forecast", expanded=True):
+        st.data_editor(df_filtered, use_container_width=True, height=700)
+
+    # ✅ Feature Selection for Graph
     st.subheader("📊 Cloud Graph")
     available_features = list(df_filtered.columns)
 
@@ -143,10 +109,37 @@ def show_cloud():
         available_features,
         default=["☁ Avg Cloud Cover (%)"]
     )
-   
 
-     # Display Data Table
-    with st.expander("🔍 View Full Cloud Forecast", expanded=True):
-        st.data_editor(df_filtered, use_container_width=True, height=700)
+    # ✅ Show Graph if Features are Selected
+    if selected_features:
+        plot_dynamic_graph(df_filtered, selected_features)
 
+def plot_dynamic_graph(df, selected_features):
+    """Creates an interactive Plotly graph based on user-selected features."""
+    st.subheader("📈 Interactive Weather Trends Over Time")
 
+    # Convert index (Date & Time) to datetime format
+    df = df.copy()
+    df.index = pd.to_datetime(df.index)
+
+    # Create Plotly figure
+    fig = px.line(
+        df,
+        x=df.index,
+        y=selected_features,
+        title="Weather Trends Over Time",
+        labels={"value": "Measurement", "index": "Date & Time (UTC)"},
+        markers=True
+    )
+
+    # ✅ Add Interactive Features
+    fig.update_layout(
+        xaxis_title="Date & Time (UTC)",
+        yaxis_title="Value",
+        legend_title="Weather Variables",
+        hovermode="x unified",
+        template="plotly_white",
+    )
+
+    # ✅ Show the Plot in Streamlit
+    st.plotly_chart(fig, use_container_width=True)
