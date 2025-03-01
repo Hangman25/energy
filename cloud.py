@@ -127,7 +127,7 @@ def show_cloud():
 
     # Display Data Table (Now Below Column Selection)
     with st.expander("🔍 View Full Cloud Forecast", expanded=True):
-        st.data_editor(df_filtered, use_container_width=True, height=500)
+        st.data_editor(df_filtered, use_container_width=True, height=200)
 
 def plot_dynamic_graph(df, selected_features, renamed_columns):
     """Creates an interactive Plotly graph based on user-selected features."""
