@@ -67,9 +67,9 @@ def show_about():
               - **Location**: Unlike *TAF* and *METAR*, this model’s predefined location is *Slemon Park, Summerside, PE*.
               - **Cloud Coverage**: In addition to regular weather forecasts, the HRRR model offers *detailed cloud coverage information*.
               - **Cloud Coverage Types**: The HRRR model provides **three different cloud coverage levels** at various altitudes:
-               - **Low Cloud Coverage (LCC)**
-               - **Mid Cloud Coverage (MCC)**
-               - **High Cloud Coverage (HCC)**
+                  - **Low Cloud Coverage (LCC)**
+                  - **Mid Cloud Coverage (MCC)**
+                  - **High Cloud Coverage (HCC)**
 
               """
          )
