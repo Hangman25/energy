@@ -89,14 +89,14 @@ def show_cloud():
     # ✅ Feature Selection for Graph (Appears First)
     available_features = list(renamed_columns.values())
 
+    st.subheader("16 Hour Cloud & Weather Forecast Graph")
+    
     # Multi-select for user to choose which features to plot
     selected_features = st.multiselect(
         "Select features to plot against Date & Time on the graph below:",
         available_features,
         default=["☁ Avg Cloud Cover (%)"]
     )
-    
-    st.subheader("16 Hour Cloud & Weather Forecast Graph")
 
     # ✅ Show Graph if Features are Selected
     if selected_features:
