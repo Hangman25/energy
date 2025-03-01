@@ -74,7 +74,22 @@ def show_cloud():
         "HGT_CLOUDBASE": "📏 Cloud Base Height (m)"
     }
 
-    # ✅ Allow Users to Select Which Columns to Display
+    # ✅ Feature Selection for Graph (Appears First)
+    st.subheader("📊 Cloud Graph")
+    available_features = list(renamed_columns.values())
+
+    # Multi-select for user to choose which features to plot
+    selected_features = st.multiselect(
+        "Select features to plot against Date & Time:",
+        available_features,
+        default=["☁ Avg Cloud Cover (%)"]
+    )
+
+    # ✅ Show Graph if Features are Selected
+    if selected_features:
+        plot_dynamic_graph(df, selected_features, renamed_columns)
+
+    # ✅ Select Columns (Moved Before Table)
     selected_columns = st.multiselect(
         "📋 Select Columns to Display in Table:",
         all_columns,
@@ -95,38 +110,28 @@ def show_cloud():
     if "📅 Date & Time (UTC)" in df_filtered.columns:
         df_filtered.set_index("📅 Date & Time (UTC)", inplace=True)
 
-    # ✅ Feature Selection for Graph (Moved Before Table)
-    st.subheader("📊 Cloud Graph")
-    available_features = list(df_filtered.columns)
-
-    # Multi-select for user to choose which features to plot
-    selected_features = st.multiselect(
-        "Select features to plot against Date & Time:",
-        available_features,
-        default=["☁ Avg Cloud Cover (%)"]
-    )
-
-    # ✅ Show Graph if Features are Selected
-    if selected_features:
-        plot_dynamic_graph(df_filtered, selected_features)
-
-    # Display Data Table (Moved Below Graph)
+    # Display Data Table (Now Below Column Selection)
     with st.expander("🔍 View Full Cloud Forecast", expanded=True):
         st.data_editor(df_filtered, use_container_width=True, height=700)
 
-def plot_dynamic_graph(df, selected_features):
+def plot_dynamic_graph(df, selected_features, renamed_columns):
     """Creates an interactive Plotly graph based on user-selected features."""
     st.subheader("📈 Interactive Weather Trends Over Time")
 
     # Convert index (Date & Time) to datetime format
     df = df.copy()
-    df.index = pd.to_datetime(df.index)
+    df["DATETIME"] = pd.to_datetime(df["DATETIME"])
+    df.set_index("DATETIME", inplace=True)
+
+    # Reverse mapping for column names
+    reverse_mapping = {v: k for k, v in renamed_columns.items()}
+    selected_columns = [reverse_mapping[feature] for feature in selected_features]
 
     # Create Plotly figure
     fig = px.line(
         df,
         x=df.index,
-        y=selected_features,
+        y=selected_columns,
         title="Weather Trends Over Time",
         labels={"value": "Measurement", "index": "Date & Time (UTC)"},
         markers=True
