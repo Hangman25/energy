@@ -129,9 +129,6 @@ def show_cloud():
     if "📅 Date & Time (UTC)" in df_filtered.columns:
         df_filtered.set_index("📅 Date & Time (UTC)", inplace=True)
 
-    # Display Data Table
-    with st.expander("🔍 View Full Cloud Forecast", expanded=True):
-        st.data_editor(df_filtered, use_container_width=True, height=700)
 
     # ✅ Feature Selection for Graph
     st.subheader("📊 Cloud Graph")
@@ -147,5 +144,9 @@ def show_cloud():
     # ✅ Show Graph if Features are Selected
     if selected_features:
         plot_dynamic_graph(df_filtered, selected_features)
+
+     # Display Data Table
+    with st.expander("🔍 View Full Cloud Forecast", expanded=True):
+        st.data_editor(df_filtered, use_container_width=True, height=700)
 
 
