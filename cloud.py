@@ -108,6 +108,21 @@ def show_cloud():
         "HGT_CLOUDBASE": "📏 Cloud Base Height (m)"
     }
 
+     # ✅ Feature Selection for Graph
+    st.subheader("📊 Cloud Graph")
+    available_features = list(df_filtered.columns)
+
+    # Multi-select for user to choose which features to plot
+    selected_features = st.multiselect(
+        "Select features to plot against Date & Time:",
+        available_features,
+        default=["☁ Avg Cloud Cover (%)"]
+    )
+
+    # ✅ Show Graph if Features are Selected
+    if selected_features:
+        plot_dynamic_graph(df_filtered, selected_features)
+
     # ✅ Allow Users to Select Which Columns to Display
     selected_columns = st.multiselect(
         "📋 Select Columns to Display in Table:",
@@ -130,20 +145,7 @@ def show_cloud():
         df_filtered.set_index("📅 Date & Time (UTC)", inplace=True)
 
 
-    # ✅ Feature Selection for Graph
-    st.subheader("📊 Cloud Graph")
-    available_features = list(df_filtered.columns)
-
-    # Multi-select for user to choose which features to plot
-    selected_features = st.multiselect(
-        "Select features to plot against Date & Time:",
-        available_features,
-        default=["☁ Avg Cloud Cover (%)"]
-    )
-
-    # ✅ Show Graph if Features are Selected
-    if selected_features:
-        plot_dynamic_graph(df_filtered, selected_features)
+   
 
      # Display Data Table
     with st.expander("🔍 View Full Cloud Forecast", expanded=True):
