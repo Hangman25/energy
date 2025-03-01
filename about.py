@@ -104,12 +104,12 @@ def show_about():
             # Plot Actual vs Predicted using Plotly
             fig1 = px.line(df, x=df.index, y=['Actual Values', 'Predicted Values'], 
                            labels={'index': 'Time Step', 'value': 'Solar Energy Output'},
-                           title="Actual vs. Predicted Solar Energy",
+                           title="Actual vs. Predicted Solar Energy Graph",
                            markers=True)
 
             fig1.update_layout(
-                xaxis_title="Time Step",
-                yaxis_title="Solar Energy Output",
+                xaxis_title="Datapoints",
+                yaxis_title="Solar Energy Output (kW)",
                 legend_title="Legend",
                 template="plotly_white"
             )
@@ -117,7 +117,7 @@ def show_about():
             st.plotly_chart(fig1, use_container_width=True)
 
             # Plot Residuals using Plotly
-            st.markdown("### Residuals (Prediction Error)")
+            st.markdown("### Residuals Graph)")
             fig2 = px.bar(df, x=df.index, y='Residuals',
                           labels={'index': 'Time Step', 'Residuals': 'Prediction Error'},
                           title="Prediction Error (Residuals)")
