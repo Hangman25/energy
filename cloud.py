@@ -95,11 +95,7 @@ def show_cloud():
     if "📅 Date & Time (UTC)" in df_filtered.columns:
         df_filtered.set_index("📅 Date & Time (UTC)", inplace=True)
 
-    # Display Data Table
-    with st.expander("🔍 View Full Cloud Forecast", expanded=True):
-        st.data_editor(df_filtered, use_container_width=True, height=700)
-
-    # ✅ Feature Selection for Graph
+    # ✅ Feature Selection for Graph (Moved Before Table)
     st.subheader("📊 Cloud Graph")
     available_features = list(df_filtered.columns)
 
@@ -113,6 +109,10 @@ def show_cloud():
     # ✅ Show Graph if Features are Selected
     if selected_features:
         plot_dynamic_graph(df_filtered, selected_features)
+
+    # Display Data Table (Moved Below Graph)
+    with st.expander("🔍 View Full Cloud Forecast", expanded=True):
+        st.data_editor(df_filtered, use_container_width=True, height=700)
 
 def plot_dynamic_graph(df, selected_features):
     """Creates an interactive Plotly graph based on user-selected features."""
