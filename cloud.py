@@ -35,10 +35,43 @@ def fetch_cloud_data():
         st.error(f"⚠ Error fetching cloud data: {e}")
         return pd.DataFrame()
 
+
+def plot_dynamic_graph(df, selected_features):
+    """Creates an interactive Plotly graph based on user-selected features."""
+    st.title("☁ Cloud & Weather Forecast")
+    
+
+    # Convert index (Date & Time) to datetime format
+    df = df.copy()
+    df.index = pd.to_datetime(df.index)
+
+    # Create Plotly figure
+    fig = px.line(
+        df,
+        x=df.index,
+        y=selected_features,
+        title="Weather Trends Over Time",
+        labels={"value": "Measurement", "index": "Date & Time (UTC)"},
+        markers=True
+    )
+
+    # ✅ Add Interactive Features
+    fig.update_layout(
+        xaxis_title="Date & Time (UTC)",
+        yaxis_title="Value",
+        legend_title="Weather Variables",
+        hovermode="x unified",
+        template="plotly_white",
+    )
+
+    # ✅ Show the Plot in Streamlit
+    st.plotly_chart(fig, use_container_width=True)
+    
+
 def show_cloud():
     """Displays cloud/weather forecast in a structured and user-friendly format."""
-    st.title("☁ Cloud & Weather Forecast")
-
+    st.subheader("☁ Cloud & Weather Forecast")
+    #st.subheader("📈 Interactive Weather Trends Over Time")
     # Fetch cloud data
     df = fetch_cloud_data()
 
@@ -115,32 +148,4 @@ def show_cloud():
     if selected_features:
         plot_dynamic_graph(df_filtered, selected_features)
 
-def plot_dynamic_graph(df, selected_features):
-    """Creates an interactive Plotly graph based on user-selected features."""
-    st.subheader("📈 Interactive Weather Trends Over Time")
 
-    # Convert index (Date & Time) to datetime format
-    df = df.copy()
-    df.index = pd.to_datetime(df.index)
-
-    # Create Plotly figure
-    fig = px.line(
-        df,
-        x=df.index,
-        y=selected_features,
-        title="Weather Trends Over Time",
-        labels={"value": "Measurement", "index": "Date & Time (UTC)"},
-        markers=True
-    )
-
-    # ✅ Add Interactive Features
-    fig.update_layout(
-        xaxis_title="Date & Time (UTC)",
-        yaxis_title="Value",
-        legend_title="Weather Variables",
-        hovermode="x unified",
-        template="plotly_white",
-    )
-
-    # ✅ Show the Plot in Streamlit
-    st.plotly_chart(fig, use_container_width=True)
