@@ -39,7 +39,14 @@ def show_cloud():
     st.title("☁ 16 Hour Cloud & Weather Forecast")
     st.markdown(
         """
-        This is test 
+        - **Forecasting Model**: The program utilizes the *HRRR (High-Resolution Rapid Refresh)* model, provided by *NOAA (National Oceanic and Atmospheric Administration)*.
+        - **Resolution**: The HRRR model has a *3 km resolution* and provides *18-hour advanced forecasts*.
+        - **Location**: Unlike *TAF* and *METAR*, this model’s predefined location is *Slemon Park, Summerside, PE*.
+        - **Cloud Coverage**: In addition to regular weather forecasts, the HRRR model offers *detailed cloud coverage information*.
+        - **Cloud Coverage Types**: The HRRR model provides **three different cloud coverage levels** at various altitudes:
+            - **Low Cloud Coverage (LCC)**
+            - **Mid Cloud Coverage (MCC)**
+            - **High Cloud Coverage (HCC)** 
         """
     )
 
