@@ -36,7 +36,12 @@ def fetch_cloud_data():
 
 def show_cloud():
     """Displays cloud/weather forecast in a structured and user-friendly format."""
-    st.title("☁ Cloud & Weather Forecast")
+    st.title("☁ 16 Hour Cloud & Weather Forecast")
+    st.markdown(
+        """
+        This is test 
+        """
+    )
 
     # Fetch cloud data
     df = fetch_cloud_data()
@@ -138,8 +143,8 @@ def plot_dynamic_graph(df, selected_features, renamed_columns):
     # ✅ Add Interactive Features
     fig.update_layout(
         xaxis_title="Date & Time (UTC)",
-        yaxis_title="Value",
-        legend_title="Weather Variables",
+        yaxis_title="Percentage",
+        legend_title="Variables",
         hovermode="x unified",
         template="plotly_white",
     )
