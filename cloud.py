@@ -75,7 +75,6 @@ def show_cloud():
     }
 
     # ✅ Feature Selection for Graph (Appears First)
-    st.subheader("📊 Cloud Graph")
     available_features = list(renamed_columns.values())
 
     # Multi-select for user to choose which features to plot
@@ -116,7 +115,6 @@ def show_cloud():
 
 def plot_dynamic_graph(df, selected_features, renamed_columns):
     """Creates an interactive Plotly graph based on user-selected features."""
-    st.subheader("📈 Interactive Weather Trends Over Time")
 
     # Convert index (Date & Time) to datetime format
     df = df.copy()
