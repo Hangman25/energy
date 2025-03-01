@@ -117,13 +117,13 @@ def show_about():
             st.plotly_chart(fig1, use_container_width=True)
 
             # Plot Residuals using Plotly
-            st.markdown("### Residuals Graph)")
+            st.markdown("### Residuals Graph")
             fig2 = px.bar(df, x=df.index, y='Residuals',
                           labels={'index': 'Time Step', 'Residuals': 'Prediction Error'},
                           title="Prediction Error (Residuals)")
 
             fig2.update_layout(
-                xaxis_title="Time Step",
+                xaxis_title="Datapoints",
                 yaxis_title="Residuals (Actual - Predicted)",
                 template="plotly_white"
             )
