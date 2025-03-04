@@ -4,7 +4,7 @@ import streamlit as st
 from datetime import datetime, timedelta
 import pytz
 import pandas as pd
-from taf import fetch_taf_data, convert_to_pei_time
+from taf import fetch_taf_data
 from cloud import fetch_cloud_data
 
 solar_data = pd.read_csv('csv/solar_2025.csv')
@@ -68,9 +68,10 @@ def get_solar_params(current_time):
         return (match['solar_elevationdegrees'].values[0],
                 match['solar_azimuthdegrees'].values[0],
                 match['solar_declinationdegrees'].values[0],
-                match['hour_angledegrees'].values[0])
+                match['hour_angledegrees'].values[0],
+                match['tmaxGHI'].values[0])
     else:
-        return 0.0, 0.0, 0.0, 0.0
+        return 0.0, 0.0, 0.0, 0.0, 0.0
 
 def extract_weather_features_for_hours():
     taf_data = fetch_taf_data()
@@ -85,7 +86,7 @@ def extract_weather_features_for_hours():
     current_time = datetime.now(pytz.timezone("America/Halifax"))
 
     low_cloud, mid_cloud, high_cloud = get_cloud_coverage_metar(metar_data)
-    solar_elevation, solar_azimuth, solar_declination, hour_angle = get_solar_params(current_time)
+    solar_elevation, solar_azimuth, solar_declination, hour_angle, tmaxGHI = get_solar_params(current_time)
 
     base_features = {
         'temperature_celsius': get_weather_value(metar_data, 'temperature', 0.0),
@@ -103,7 +104,7 @@ def extract_weather_features_for_hours():
         'solar_declinationdegrees': solar_declination,
         'hour_angledegrees': hour_angle,
         'timehr': current_time.hour,
-        'tmaxGHI': 800.0
+        'tmaxGHI': tmaxGHI
     }
     features_list.append(base_features)
 
@@ -126,7 +127,7 @@ def extract_weather_features_for_hours():
         temp = closest_row['TMP'].values[0] if not closest_row.empty else prev_features['temperature_celsius']
         humidity = closest_row['RH'].values[0] if not closest_row.empty else prev_features['humidity_percent']
 
-        solar_elevation, solar_azimuth, solar_declination, hour_angle = get_solar_params(next_time)
+        solar_elevation, solar_azimuth, solar_declination, hour_angle, tmaxGHI = get_solar_params(next_time)
 
         taf_features = {
             'temperature_celsius': temp,
@@ -144,7 +145,7 @@ def extract_weather_features_for_hours():
             'solar_declinationdegrees': solar_declination,
             'hour_angledegrees': hour_angle,
             'timehr': next_time.hour,
-            'tmaxGHI': 800.0
+            'tmaxGHI': tmaxGHI
         }
         features_list.append(taf_features)
         prev_features = taf_features
