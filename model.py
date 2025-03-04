@@ -1,11 +1,12 @@
 import joblib
 import xgboost as xgb
+import pandas as pd
 
 def load_model():
     """Loads the trained XGBoost model and retrieves expected feature names."""
-    model = joblib.load("model.pkl")  # Load model
+    model = joblib.load("model.pkl")  # Directly loads an XGBoost Booster
 
-    # Extract feature names
+    # ✅ Directly extract feature names
     expected_features = model.feature_names
 
     return model, expected_features  # Ensure two values are returned
@@ -13,16 +14,23 @@ def load_model():
 def predict_power(model, expected_features, features_df):
     """Runs predictions using the XGBoost model."""
 
-    # Ensure the DataFrame matches the model's expected feature order
+    # ✅ Ensure the DataFrame matches the model's expected feature order
     features_df = features_df[expected_features]
 
-    # Check if tmaxGHI is 0
-    if 'tmaxGHI' in features_df.columns and features_df['tmaxGHI'].iloc[0] == 0:
-        return 0.0  # Ensure output is 0 when tmaxGHI is 0
+    # Check where tmaxGHI is 0 and initialize prediction results
+    if 'tmaxGHI' in features_df.columns:
+        mask = features_df['tmaxGHI'] == 0
+    else:
+        mask = pd.Series(False, index=features_df.index)  # Default to False if column is missing
 
     # Convert to DMatrix
     dmatrix_input = xgb.DMatrix(features_df, feature_names=expected_features)
 
-    # Predict and return result
-    prediction = model.predict(dmatrix_input)
-    return max(0, prediction[0])  # Ensure power output is non-negative
+    # Predict power output
+    predictions = model.predict(dmatrix_input)
+
+    # Apply mask: If tmaxGHI is 0, force prediction to be 0
+    predictions[mask] = 0.0
+
+    # Ensure non-negative output
+    return predictions.clip(min=0)
