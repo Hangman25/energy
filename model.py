@@ -33,4 +33,5 @@ def predict_power(model, expected_features, features_df):
     predictions[mask] = 0.0
 
     # Ensure non-negative output
-    return predictions.clip(min=0)
+    return float(predictions.clip(min=0)[0])  # Extract the first (and only) value as a float
+
