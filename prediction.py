@@ -1,7 +1,5 @@
 import streamlit as st
 import pandas as pd
-import smtplib
-import ssl
 from email.message import EmailMessage
 from weather import extract_weather_features_for_hours
 from model import load_model, predict_power
@@ -19,7 +17,7 @@ def plot_interactive_graphs(data):
 
     # Weather parameters selection using multiselect
     weather_columns = ['low_cloud_coverage', 'temperature_celsius', 'humidity_percent', 
-                       'wind_speed_kmph', 'wind_gust_kmph', 'visibility_meters_float']
+                       'wind_speed_kmph', 'wind_gust_kmph', 'visibility_meters_float','tmaxGHI']
 
     selected_features = st.multiselect(
         "🌦️ **Select Weather Parameters to Display in the Weather Graph:**",
