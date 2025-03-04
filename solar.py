@@ -113,8 +113,8 @@ def visualize_csv(file_name):
         # Show Graph View
         if st.session_state.view_mode == "Graph":
             st.subheader(title_text)  # Dynamic title
-            all_y_options = ["solar_azimuthdegrees", "solar_elevationdegrees", "solar_declinationdegrees", "hour_angledegrees"]
-            selected_y_axes = st.multiselect("Select Y-axis columns", all_y_options, default=["solar_elevationdegrees"])
+            all_y_options = ["solar_azimuthdegrees", "solar_elevationdegrees", "solar_declinationdegrees", "hour_angledegrees","tmaxGHI"]
+            selected_y_axes = st.multiselect("Select Y-axis columns", all_y_options, default=["solar_azimuthdegrees"])
 
             primary_y = ["solar_azimuthdegrees"] if "solar_azimuthdegrees" in selected_y_axes else selected_y_axes
             secondary_y = [col for col in selected_y_axes if col != "solar_azimuthdegrees"] if "solar_azimuthdegrees" in selected_y_axes else []
@@ -149,6 +149,3 @@ def visualize_csv(file_name):
                 
     except Exception as e:
         st.error(f"Error loading CSV file: {e}")
-
-
-
