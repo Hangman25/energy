@@ -15,9 +15,9 @@ def predict_power(model, expected_features, features_df):
     """Runs predictions using the XGBoost model."""
 
     # ✅ Ensure the DataFrame matches the model's expected feature order
-    features_df = features_df[expected_features]
+    features_df = features_df[expected_features].copy()
 
-    # Check where tmaxGHI is 0 and initialize prediction results
+    # Check where tmaxGHI is 0
     if 'tmaxGHI' in features_df.columns:
         mask = features_df['tmaxGHI'] == 0
     else:
