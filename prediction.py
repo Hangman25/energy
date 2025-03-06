@@ -87,7 +87,7 @@ def show_prediction():
         middle.markdown("File Downloaded.")
 
     if right.button("Extra button", icon=":material/mood:", use_container_width=True):
-        right.markdown("You clicked the Material button.")
+        right.markdown("You clicked a button. YAY!")
 
     # Plot interactive graphs
     st.write("### Prediction Graphs:")
