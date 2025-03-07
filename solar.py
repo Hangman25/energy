@@ -113,11 +113,15 @@ def visualize_csv(file_name):
         # Show Graph View
         if st.session_state.view_mode == "Graph":
             st.subheader(title_text)  # Dynamic title
-            all_y_options = ["solar_azimuthdegrees", "solar_elevationdegrees", "solar_declinationdegrees", "hour_angledegrees","tmaxGHI"]
+            all_y_options = ["solar_azimuthdegrees", "solar_elevationdegrees", "solar_declinationdegrees", "hour_angledegrees", "tmaxGHI"]
             selected_y_axes = st.multiselect("Select Y-axis columns", all_y_options, default=["tmaxGHI"])
 
             primary_y = ["solar_azimuthdegrees"] if "solar_azimuthdegrees" in selected_y_axes else selected_y_axes
             secondary_y = [col for col in selected_y_axes if col != "solar_azimuthdegrees"] if "solar_azimuthdegrees" in selected_y_axes else []
+
+            # Define Y-axis labels dynamically
+            primary_y_label = "Wh/m2" if "tmaxGHI" in primary_y else "Degree"
+            secondary_y_label = "Degree"
 
             fig = go.Figure()
             for col in primary_y:
@@ -127,25 +131,12 @@ def visualize_csv(file_name):
 
             fig.update_layout(
                 xaxis=dict(title="Time Stamp"),
-                yaxis=dict(title="Degree", side="left", showgrid=False),
-                yaxis2=dict(title="Degree", overlaying="y", side="right", showgrid=False) if secondary_y else None,
-                legend=dict(orientation="h", yanchor="bottom", y=1.1, xanchor="center", x=0.5)  # Moves legend above the graph horizontally
+                yaxis=dict(title=primary_y_label, side="left", showgrid=False),
+                yaxis2=dict(title=secondary_y_label, overlaying="y", side="right", showgrid=False) if secondary_y else None,
+                legend=dict(orientation="h", yanchor="bottom", y=1.1, xanchor="center", x=0.5)
             )
 
             st.plotly_chart(fig)
             if st.button("To CSV"):
                 st.session_state.view_mode = "CSV"
                 st.rerun()
-
-        # Show CSV View
-        else:
-            st.subheader(title_text)  # Dynamic title
-            df_filtered.set_index("timestamp", inplace=True)
-            st.dataframe(df_filtered, use_container_width=True)
-
-            if st.button("To Graph"):
-                st.session_state.view_mode = "Graph"
-                st.rerun()
-                
-    except Exception as e:
-        st.error(f"Error loading CSV file: {e}")
