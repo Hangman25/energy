@@ -1,12 +1,12 @@
 import streamlit as st
 import pandas as pd
 from email.message import EmailMessage
-from weather import extract_weather_features_for_hours
-from model import load_model, predict_power
+from scripts.weather import extract_weather_features_for_hours
+from scripts.model import load_model, predict_power
 from io import BytesIO
 import plotly.express as px
 from datetime import datetime
-from csv_email import send_email
+from scripts.csv_email import send_email
 
 def plot_interactive_graphs(data):
     # Graph 1: Predicted Power (Interactive)
