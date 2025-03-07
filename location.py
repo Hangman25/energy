@@ -32,10 +32,16 @@ def show_location_predictions():
 
             # Sidebar User Inputs for Power Calculation
             st.sidebar.header("Settings")
-            loc = st.sidebar.text_input("Enter Location Name", value="Brackly")
+
+            # Predefined Locations for Dropdown Selection
+            location_options = ["Brackly", "Slemon Park", "Rustico", "New Glasgow", "Crapaud"]
+
+            # Dropdown to Select Location
+            loc = st.sidebar.selectbox("Select Location", options=location_options, index=0)
+
+            # Numerical Inputs for Capacities
             slemonpark_capacity = st.sidebar.number_input("Slemon Park Capacity (kW)", value=12500)
             brackly_capacity = st.sidebar.number_input(f"{loc} Capacity (kW)", value=1000)
-            
 
             # Calculate Percentages for Location Power
             percent_slemonpark = [power / slemonpark_capacity for power in preds_list]
@@ -45,11 +51,11 @@ def show_location_predictions():
             df[f'Predicted Power in {loc} (kW)'] = percent_brackly
 
             # Display Data
-            st.success("✅ Data processed successfully!")
+            st.success(f"✅ Data processed successfully for {loc}!")
             st.dataframe(df)
 
             # Allow Download of Processed Data
             csv = df.to_csv(index=False).encode('utf-8')
-            st.download_button("📥 Download Processed CSV", data=csv, file_name="processed_location_data.csv", mime="text/csv")
+            st.download_button("📥 Download Processed CSV", data=csv, file_name=f"processed_location_data_{loc}.csv", mime="text/csv")
     else:
         st.info("📂 Please upload a CSV file to proceed.")
