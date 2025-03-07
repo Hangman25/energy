@@ -85,8 +85,9 @@ def show_about():
               """
          )
         
-     with st.expander ("Location Page?"):
-         st.markdown(
+    with st.expander ("Location Page?"):
+        
+        st.markdown(
               """
                 - **Upload CSV**: The user must upload the predictions CSV generated from the `predictions page`.
                 - **Automation**: The program will take the default value of Slemon Park solar capacity to be 12500 kW and estimate the for Brackley.
@@ -94,7 +95,7 @@ def show_about():
                 - **Solar Capacity**: Defaul value is 1000 kW but can also be changed as needed.
              
               """
-         )
+        )
 
     st.markdown("### Our Predictions So Far:")
 
