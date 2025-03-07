@@ -33,7 +33,7 @@ def show_location_predictions():
             # Sidebar User Inputs for Power Calculation
             st.sidebar.header("Settings")
             loc = st.sidebar.text_input("Enter Location Name", value="Brackly")
-            slemonpark_capacity = st.sidebar.number_input("Slemonpark Capacity (kW)", value=12500)
+            slemonpark_capacity = st.sidebar.number_input("Slemon Park Capacity (kW)", value=12500)
             brackly_capacity = st.sidebar.number_input(f"{loc} Capacity (kW)", value=1000)
             
 
