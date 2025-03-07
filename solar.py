@@ -13,8 +13,8 @@ def visualize_csv(file_name):
 
         # Sidebar: Select Time Range
         time_range = st.sidebar.selectbox("Select Time Range", 
-                                          ["Daily", "Weekly", "Monthly", "Quarterly", "6 Months", "9 Months", "12 Months"], 
-                                          index=0)
+                                          ["Daily", "Weekly", "Monthly", "Quarterly", "6 Months", "9 Months", "Yearly"], 
+                                          index=6)
 
         # Get Current Date
         today = datetime.datetime.today()
