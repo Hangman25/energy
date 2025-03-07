@@ -4,8 +4,8 @@ import streamlit as st
 from datetime import datetime, timedelta
 import pytz
 import pandas as pd
-from taf import fetch_taf_data
-from cloud import fetch_cloud_data
+from scripts.taf import fetch_taf_data
+from scripts.cloud import fetch_cloud_data
 
 solar_data = pd.read_csv('csv/solar_2025.csv')
 solar_data['timestamp'] = pd.to_datetime(solar_data['timestamp'])
