@@ -34,7 +34,7 @@ def show_location_predictions():
             st.sidebar.header("Settings")
 
             # Predefined Locations for Dropdown Selection
-            location_options = ["Brackly", "Slemon Park", "Rustico", "New Glasgow", "Crapaud"]
+            location_options = ["Brackley", "Slemon Park", "Rustico", "New Glasgow", "Crapaud"]
 
             # Dropdown to Select Location
             loc = st.sidebar.selectbox("Select Location", options=location_options, index=0)
