@@ -1,11 +1,11 @@
 import streamlit as st
-from prediction import show_prediction
-from about import show_about
-from metar import show_metar
-from taf import show_taf
-from cloud import show_cloud
-from solar import visualize_csv
-from location import show_location_predictions 
+from scripts.prediction import show_prediction
+from scripts.about import show_about
+from scripts.metar import show_metar
+from scripts.taf import show_taf
+from scripts.cloud import show_cloud
+from scripts.solar import visualize_csv
+from scripts.location import show_location_predictions 
 
 st.set_page_config(layout="wide", page_title="🌤️ Energy Prediction Dashboard")
 
